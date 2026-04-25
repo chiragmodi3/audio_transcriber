@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { LockKeyhole, User, Loader2 } from "lucide-react";
 
 export default function Login() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -17,7 +17,7 @@ export default function Login() {
       const res = await fetch("/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, password }),
       });
 
       const data = await res.json();
@@ -51,7 +51,7 @@ export default function Login() {
           <form onSubmit={login} className="space-y-5">
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                Username
+                Email Address
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
@@ -59,10 +59,10 @@ export default function Login() {
                 </div>
                 <input
                   required
-                  type="text"
+                  type="email"
                   className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-slate-900 placeholder:text-slate-400"
-                  placeholder="Enter your username"
-                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="name@company.com"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
             </div>

@@ -1,18 +1,23 @@
+import { prisma } from "@/lib/prisma";
 import { cookies } from "next/headers";
 
 export async function POST(req) {
-    const { username, password } = await req.json();
+    const { email, password } = await req.json();
 
-    if (username === "admin" && password === "admin123") {
-        const cookieStore = await cookies();
+    const user = await prisma.admin.findFirst({
+        where: { email, password },
+    });
 
-        cookieStore.set("user", username, {
-            httpOnly: true,
-            path: "/",
-        });
-
-        return Response.json({ success: true });
+    if (!user) {
+        return Response.json({ error: "Invalid login" }, { status: 401 });
     }
 
-    return Response.json({ error: "Invalid credentials" }, { status: 401 });
+    const cookieStore = await cookies();
+
+    cookieStore.set("user", user.email, {
+        httpOnly: true,
+        path: "/",
+    });
+
+    return Response.json({ success: true });
 }
