@@ -29,6 +29,11 @@ A full-stack audio transcription web application built using Next.js, PostgreSQL
 
 https://audiotranscriber-production-3ef0.up.railway.app/
 
+## Login Credentials
+
+email: admin@test.com
+password: admin12345
+
 ## 📂 Project Structure
 app/
 ├── api/
@@ -75,8 +80,8 @@ Use API:
 http://localhost:3000/api/create-admin
 
 OR manually insert into DB:
-username: admin
-password: admin123
+email: admin@test.com
+password: admin12345
 
 ### 6. Run the app
 
